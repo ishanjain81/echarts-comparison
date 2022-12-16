@@ -1,0 +1,23 @@
+*{
+    box-sizing: border-box;
+}
+.main-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+.left-container{
+    width: 42%;
+    /* border: 1px solid red; */
+
+}
+.right-container{
+    width: 42%;
+    padding-left: 5%;
+    /* border: 1px solid rgb(23, 199, 178); */
+
+}
+.value-container{
+    width: 16%;
+    border: 1px solid black;
+}
