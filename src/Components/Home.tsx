@@ -1,5 +1,7 @@
 import React,{useState} from 'react';
 import ReactEcharts from "echarts-for-react"; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendar, faFilter, faEllipsis, faCircleChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons';
 import './Home.css';
 
 function Home() {
@@ -92,7 +94,7 @@ function Home() {
         xAxis: {
           type: 'value',
           min: -20,
-          max: 22,
+          max: 30,
         },
         yAxis: {
           type: 'category',
@@ -117,9 +119,26 @@ function Home() {
 
   return (
     <div className="main-container">
-        <div className="left-container"><ReactEcharts option={option} style={{height: '100%', width: '100%'}} /></div>
-        <div className="right-container"><ReactEcharts option={option1} style={{height: '100%', width: '100%'}}/></div>
-        <div className="value-container"></div>
+      <div className="data-container">
+        <div className="top-container">
+          <div className="heading">
+            <h4 className="heading-top">Comparison of current case age to historical time to close &nbsp;
+              <FontAwesomeIcon className="down-button" icon={faCircleChevronDown}/>
+            </h4>
+            <p className="heading-bottom">Are current cases remaining open larger than the historical time to close?</p>
+          </div>
+          <div className="buttons">
+            <button className="top-button"><FontAwesomeIcon icon={faCalendar}/>&nbsp; 2019</button>
+            <button className="top-button"><FontAwesomeIcon icon={faPlus}/>&nbsp;&nbsp;<FontAwesomeIcon icon={faFilter}/> Filter</button>
+            <button className="top-button"><FontAwesomeIcon icon={faEllipsis}/></button>
+          </div>
+        </div>
+        <div className="chart-container">
+          <div className="left-container"><ReactEcharts option={option} style={{height: '100%', width: '100%'}} /></div>
+          <div className="right-container"><ReactEcharts option={option1} style={{height: '100%', width: '100%'}}/></div>
+        </div>
+      </div>
+      <div className="value-container"></div>
     </div>
   )
 }
