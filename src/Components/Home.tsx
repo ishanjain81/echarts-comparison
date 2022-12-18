@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import ReactEcharts from "echarts-for-react"; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faCircleChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faInfo, faGear, faCircleStop, faInbox, faBars } from '@fortawesome/free-solid-svg-icons';
 import './Home.css';
 
 function Home() {
@@ -190,6 +191,13 @@ function Home() {
           <div className="left-container"><ReactEcharts option={option} style={{height: '100%', width: '100%'}} /></div>
           <div className="right-container"><ReactEcharts option={option1} style={{height: '100%', width: '100%'}}/></div>
         </div>
+      </div>
+      <div className="icons-container">
+        <div className="icon-box bg-blue"><FontAwesomeIcon className="icon" icon={faInfo}/></div>
+        <div className="icon-box"><FontAwesomeIcon className="icon" icon={faBars}/></div>
+        <div className="icon-box"><FontAwesomeIcon className="icon" icon={faGear}/></div>
+        <div className="icon-box"><FontAwesomeIcon className="icon" icon={faCircleStop}/></div>
+        <div className="icon-box bg-black"><FontAwesomeIcon className="icon" icon={faInbox}/></div>
       </div>
       <div className="value-container">
         <div className="summary">

@@ -195,3 +195,36 @@
 .green{
     color: #40e7d9;
 }
+
+.icons-container{
+    position: absolute;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 78.9%;
+    z-index: 2;
+}
+
+.icon-box{
+    margin-bottom: 10px;
+    border: 1px solid black;
+    padding: 6px;
+    border-radius: 18px;
+    text-align: center;
+    background-color: rgb(104, 103, 103);
+}
+
+.icon{
+    font-size: 18px;
+    cursor: pointer;
+    color: white;
+}
+
+.bg-blue{
+    background-color: #33b1f5;
+}
+
+.bg-black{
+    background-color: black;
+}
