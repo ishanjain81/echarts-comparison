@@ -235,7 +235,7 @@ function Home() {
         </div>
         <div className="value-box">
           <div className="value-box-left grey">Average HeadCount</div>
-          <div className="value-box-right grey">4.58 K</div>
+          <div className="value-box-right grey">4.58 <span className="k-small">&nbsp;K</span></div>
         </div>
         <div className="value-box">
           <div className="value-box-left red">High Performer</div>
@@ -247,7 +247,7 @@ function Home() {
         </div>
         <div className="value-box">
           <div className="value-box-left grey">Average HeadCount</div>
-          <div className="value-box-right grey">1.08 K</div>
+          <div className="value-box-right grey">1.08 <span className="k-small">&nbsp;K</span></div>
         </div>
         <div className="value-box">
           <div className="value-box-left green">Difference</div>
