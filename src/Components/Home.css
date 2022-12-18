@@ -48,7 +48,7 @@
 .value-container{
     width: 20%;
     border: 1px solid black;
-    background-color: rgb(255, 249, 249);
+    background-color: #f2f4ff;
 }
 
 .heading-top{
@@ -107,6 +107,7 @@
     height: 5%;
     display: flex;
     justify-content: space-between;
+    background-color: white;
 }
 
 .details-btn{

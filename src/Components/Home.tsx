@@ -163,10 +163,14 @@ function Home() {
         },
         yAxis: {
           type: 'category',
-          axisLine: { show: false },
           axisLabel: { show: false },
           axisTick: { show: false },
           splitLine: { show: false },
+          axisLine:{
+            lineStyle:{
+              color: '#cccccc'
+            }
+          }
         },
         series: [
           {
