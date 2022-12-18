@@ -6,9 +6,10 @@ import { faInfo, faGear, faCircleStop, faInbox, faBars } from '@fortawesome/free
 import './Home.css';
 
 function Home() {
-    const [daysToCloseCase,setDaysToCloseCase] = useState<number[]>([9.37, 11.0, 11.9, 12.3, 12.5, 12.9, 13.7, 15.3, 16.6]);
-    const [openCasesAge,setOpenCasesAge] = useState<number[]>([8.59, 0.01, 10.9, 12.0, 9.27, 20.8, 11.6, 18.1, 16.6]);
-    const difference : number[] = [0.78, 11.01, 1.08, 0.34, 3.20, -7.91, 2.04, -2.87, 0.01];
+    const [overall,setOverall] = useState<number[]>([9.37, 11.0, 11.9, 12.3, 12.5, 12.9, 13.7, 15.3, 16.6]);
+    const [highPerformer,setHighPerformer] = useState<number[]>([8.59, 0.01, 10.9, 12.0, 9.27, 20.8, 11.6, 18.1, 16.6]);
+    const difference : number[] = [0.78, 11.01, 1.08, 0.34, 3.20, -7.90, 2.04, -2.87, 0.01];
+    const ylabels: string[] = ['Product', 'Office of CEO', 'Marketing', 'Customer Support', 'Finance', 'HR', 'IT', 'Sales', 'Operations'];
     let arr: any[] = [];
 
     const labelRight = {
@@ -52,6 +53,12 @@ function Home() {
           axisLine:{
             show: true
           },
+          splitLine:{
+            show: true,
+            lineStyle:{
+              color: '#cccccc'
+            }
+          },
           axisLabel:{
             formatter: function (value: number) {
               if(value === 0){
@@ -65,7 +72,7 @@ function Home() {
         },
         yAxis: {
           type: 'category',
-          data: ['Product', 'Office of CEO', 'Marketing', 'Customer Support', 'Finance', 'HR', 'IT', 'Sales', 'Operations'],
+          data: ylabels,
           axisTick:{
             show: false
           }
@@ -84,7 +91,7 @@ function Home() {
                 color: '#5CB5E6'
             },
             color: '#5CB5E6',
-            data: daysToCloseCase,
+            data: overall,
             barGap: 0
           },
           {
@@ -100,7 +107,7 @@ function Home() {
                 color: '#FD8F80'
             },
             color: '#FD8F80',
-            data: openCasesAge
+            data: highPerformer
           }
         ]
       };
@@ -112,8 +119,16 @@ function Home() {
             type: 'shadow'
           },
           formatter: function (params: any) {
-            console.log(params)
-            return `${params}<br />`;
+            let index: number = Number(params[0].name);
+            let str: string = ylabels[index];
+            let v1: number = overall[index];
+            let v2: number = highPerformer[index];
+            return `<div className="label-cont">
+                <div style="color: black;font-weight: bold;">${str} 2019</div>
+                <div style="color: #33b1f5;">Overall: ${v1}</div>
+                <div style="color: rgb(244, 73, 73)">High Performer: ${v2}</div>
+                <div style="color: #40e7d9;">Difference: ${params[0].value} pp</div>
+              </div>`;
           }
         },
         grid: {
@@ -128,6 +143,12 @@ function Home() {
           max: 20,
           axisLine:{
             show: true
+          },
+          splitLine:{
+            show: true,
+            lineStyle:{
+              color: '#cccccc'
+            }
           },
           axisLabel:{
             formatter: function (value: number) {
@@ -157,11 +178,12 @@ function Home() {
                 formatter: function (data: any) {
                   let s: string = data.value.toString();
                   if(data.value >= 0){
-                    return '+' + s + ' pp';
+                    s = '+' + s;
                   }
-                  else{
-                    return s + ' pp';
+                  if(s.length === 4){
+                    s = s + '0';
                   }
+                  return s + ' pp';
                 },
                 fontWeight: 600,
                 color: '#5AD0C7'
@@ -177,9 +199,9 @@ function Home() {
       <div className="data-container">
         <div className="top-container">
           <div className="heading">
-            <h4 className="heading-top">Comparison of high performer resignation rates to the overall resignation rate &nbsp;
+            <h3 className="heading-top">Comparison of high performer resignation rates to the overall resignation rate &nbsp;
               <FontAwesomeIcon className="down-button" icon={faCircleChevronDown}/>
-            </h4>
+            </h3>
             <p className="heading-bottom">Do high performers resign more often than the others?</p>
           </div>
           <div className="buttons">
