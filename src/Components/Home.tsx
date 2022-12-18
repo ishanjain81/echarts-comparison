@@ -6,10 +6,13 @@ import { faInfo, faGear, faCircleStop, faInbox, faBars } from '@fortawesome/free
 import './Home.css';
 
 function Home() {
+    // arrays with the data to plot the curves
     const [overall,setOverall] = useState<number[]>([9.37, 11.0, 11.9, 12.3, 12.5, 12.9, 13.7, 15.3, 16.6]);
     const [highPerformer,setHighPerformer] = useState<number[]>([8.59, 0.01, 10.9, 12.0, 9.27, 20.8, 11.6, 18.1, 16.6]);
     const difference : number[] = [0.78, 11.01, 1.08, 0.34, 3.20, -7.90, 2.04, -2.87, 0.01];
+     // arrays with the y-axis labels
     const ylabels: string[] = ['Product', 'Office of CEO', 'Marketing', 'Customer Support', 'Finance', 'HR', 'IT', 'Sales', 'Operations'];
+    // array to store difference data with label position
     let arr: any[] = [];
 
     const labelRight = {
@@ -20,6 +23,7 @@ function Home() {
         position: 'left'
     } as const;
 
+    // if diff is +ve then set label to right otherwise it will be towards left
     for(let index = 0; index < difference.length; index++){
         if(difference[index] >= 0){
             arr.push({
@@ -35,6 +39,7 @@ function Home() {
         }
     }
 
+    // echarts options to make the 1st curve
     const option = {
         tooltip: {
           trigger: 'axis',
@@ -60,6 +65,7 @@ function Home() {
             }
           },
           axisLabel:{
+            // adding unit to x-axis 
             formatter: function (value: number) {
               if(value === 0){
                 return value + '.00%'
@@ -84,6 +90,7 @@ function Home() {
             label: {
                 show: true,
                 position: 'right',
+                // adding unit to x-axis 
                 formatter: function (data: any) {
                   return data.value + '%';
                 },
@@ -100,6 +107,7 @@ function Home() {
             label: {
                 show: true,
                 position: 'right',
+                // adding unit to x-axis 
                 formatter: function (data: any) {
                   return data.value + '%';
                 },
@@ -112,12 +120,14 @@ function Home() {
         ]
       };
       
+      // echarts options to make the 2nd curve
       const option1 = {
         tooltip: {
           trigger: 'axis',
           axisPointer: {
             type: 'shadow'
           },
+          // setting custom labels
           formatter: function (params: any) {
             let index: number = Number(params[0].name);
             let str: string = ylabels[index];
@@ -150,6 +160,7 @@ function Home() {
               color: '#cccccc'
             }
           },
+          // adding unit to x-axis 
           axisLabel:{
             formatter: function (value: number) {
               if(value === 0){
@@ -178,6 +189,7 @@ function Home() {
             type: 'bar',
             stack: 'Total',
             label: {
+                // adding custom labels to x-axis units
                 show: true,
                 formatter: function (data: any) {
                   let s: string = data.value.toString();
