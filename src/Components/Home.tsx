@@ -1,12 +1,13 @@
 import React,{useState} from 'react';
 import ReactEcharts from "echarts-for-react"; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faFilter, faEllipsis, faCircleChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faCircleChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons';
 import './Home.css';
 
 function Home() {
-    const [daysToCloseCase,setDaysToCloseCase] = useState<number[]>([23.2, 23.9, 38.6, 41.7, 48.7, 60.6, 83.9]);
-    const [openCasesAge,setOpenCasesAge] = useState<number[]>([15.9, 15.5, 28.7, 54.5, 53.6, 68.3, 64]);
+    const [daysToCloseCase,setDaysToCloseCase] = useState<number[]>([9.37, 11.0, 11.9, 12.3, 12.5, 12.9, 13.7, 15.3, 16.6]);
+    const [openCasesAge,setOpenCasesAge] = useState<number[]>([8.59, 0.01, 10.9, 12.0, 9.27, 20.8, 11.6, 18.1, 16.6]);
+    const difference : number[] = [0.78, 11.01, 1.08, 0.34, 3.20, -7.91, 2.04, -2.87, 0.01];
     let arr: any[] = [];
 
     const labelRight = {
@@ -17,17 +18,16 @@ function Home() {
         position: 'left'
     } as const;
 
-    for(let index = 0; index < daysToCloseCase.length; index++){
-        let d: number = Number((daysToCloseCase[index] - openCasesAge[index]).toFixed(2));
-        if(d >= 0){
+    for(let index = 0; index < difference.length; index++){
+        if(difference[index] >= 0){
             arr.push({
-                value: d,
+                value: difference[index],
                 label: labelRight
             });
         }
         else{
             arr.push({
-                value: d,
+                value: difference[index],
                 label: labelLeft
             });
         }
@@ -48,31 +48,57 @@ function Home() {
         },
         xAxis: {
           type: 'value',
-          boundaryGap: [0, 0.01],
+          axisLine:{
+            show: true
+          },
+          axisLabel:{
+            formatter: function (value: number) {
+              if(value === 0){
+                return value + '.00%'
+              }
+              else{
+                return value + '.0%';
+              }
+            }
+          }
         },
         yAxis: {
           type: 'category',
-          data: ['Leave of Absence', 'HR Policy Enquiry', 'Employee Relations', 'Data Change', 'Employee Grievance', 'Compensation', 'Benefits']
+          data: ['Product', 'Office of CEO', 'Marketing', 'Customer Support', 'Finance', 'HR', 'IT', 'Sales', 'Operations'],
+          axisTick:{
+            show: false
+          }
         },
         series: [
           {
-            name: 'Case Days to Close',
+            name: 'Overall',
             type: 'bar',
             label: {
                 show: true,
-                position: 'right'
+                position: 'right',
+                formatter: function (data: any) {
+                  return data.value + '%';
+                },
+                fontWeight: 600,
+                color: '#5CB5E6'
             },
-            color: 'rgb(15, 174, 227)',
-            data: daysToCloseCase
+            color: '#5CB5E6',
+            data: daysToCloseCase,
+            barGap: 0
           },
           {
-            name: 'Open Cases Age',
+            name: 'High Performer',
             type: 'bar',
             label: {
                 show: true,
-                position: 'right'
+                position: 'right',
+                formatter: function (data: any) {
+                  return data.value + '%';
+                },
+                fontWeight: 600,
+                color: '#FD8F80'
             },
-            color: 'rgb(238, 85, 111)',
+            color: '#FD8F80',
             data: openCasesAge
           }
         ]
@@ -83,6 +109,10 @@ function Home() {
           trigger: 'axis',
           axisPointer: {
             type: 'shadow'
+          },
+          formatter: function (params: any) {
+            console.log(params)
+            return `${params}<br />`;
           }
         },
         grid: {
@@ -94,7 +124,20 @@ function Home() {
         xAxis: {
           type: 'value',
           min: -20,
-          max: 30,
+          max: 20,
+          axisLine:{
+            show: true
+          },
+          axisLabel:{
+            formatter: function (value: number) {
+              if(value === 0){
+                return '0.00 pp';
+              }
+              else{
+                return value + '.0 pp';
+              }
+            }
+          }
         },
         yAxis: {
           type: 'category',
@@ -110,8 +153,19 @@ function Home() {
             stack: 'Total',
             label: {
                 show: true,
+                formatter: function (data: any) {
+                  let s: string = data.value.toString();
+                  if(data.value >= 0){
+                    return '+' + s + ' pp';
+                  }
+                  else{
+                    return s + ' pp';
+                  }
+                },
+                fontWeight: 600,
+                color: '#5AD0C7'
             },
-            color: 'rgb(23, 199, 178)',
+            color: '#5AD0C7',
             data: arr
           }
         ]
@@ -122,15 +176,14 @@ function Home() {
       <div className="data-container">
         <div className="top-container">
           <div className="heading">
-            <h4 className="heading-top">Comparison of current case age to historical time to close &nbsp;
+            <h4 className="heading-top">Comparison of high performer resignation rates to the overall resignation rate &nbsp;
               <FontAwesomeIcon className="down-button" icon={faCircleChevronDown}/>
             </h4>
-            <p className="heading-bottom">Are current cases remaining open larger than the historical time to close?</p>
+            <p className="heading-bottom">Do high performers resign more often than the others?</p>
           </div>
           <div className="buttons">
-            <button className="top-button"><FontAwesomeIcon icon={faCalendar}/>&nbsp; 2019</button>
-            <button className="top-button"><FontAwesomeIcon icon={faPlus}/>&nbsp;&nbsp;<FontAwesomeIcon icon={faFilter}/> Filter</button>
-            <button className="top-button"><FontAwesomeIcon icon={faEllipsis}/></button>
+            <button className="top-button"><FontAwesomeIcon icon={faCalendar}/>&nbsp; Mar 2019</button>
+            <button className="top-button"><FontAwesomeIcon icon={faPlus}/>&nbsp;&nbsp; Add a Filter</button>
           </div>
         </div>
         <div className="chart-container">
