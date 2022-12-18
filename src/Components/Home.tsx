@@ -191,7 +191,42 @@ function Home() {
           <div className="right-container"><ReactEcharts option={option1} style={{height: '100%', width: '100%'}}/></div>
         </div>
       </div>
-      <div className="value-container"></div>
+      <div className="value-container">
+        <div className="summary">
+          <div id="sum-cont"><div id="sum-head">Summary</div><div>Apr 2018 - Mar 2019 </div></div>
+        </div>
+        <div className="value-box">
+          <div className="value-box-left blue">Overall</div>
+          <div className="value-box-right blue">14.0 %</div>
+        </div>
+        <div className="value-box">
+          <div className="value-box-left grey">Resignation Count</div>
+          <div className="value-box-right grey">639</div>
+        </div>
+        <div className="value-box">
+          <div className="value-box-left grey">Average HeadCount</div>
+          <div className="value-box-right grey">4.58 K</div>
+        </div>
+        <div className="value-box">
+          <div className="value-box-left red">High Performer</div>
+          <div className="value-box-right red">14.1 %</div>
+        </div>
+        <div className="value-box">
+          <div className="value-box-left grey">Resignation Count</div>
+          <div className="value-box-right grey">152</div>
+        </div>
+        <div className="value-box">
+          <div className="value-box-left grey">Average HeadCount</div>
+          <div className="value-box-right grey">1.08 K</div>
+        </div>
+        <div className="value-box">
+          <div className="value-box-left green">Difference</div>
+          <div className="value-box-right green">-0.16 pp</div>
+        </div>
+        <div className="details-btn"><button>View details</button></div>
+        <div className="chart-comp">Chart Completeness</div>
+        <div className="settings-box"><div>Not all data are shown in this chart. To show these values, go to</div><div className="chart-settings">CHART SETTINGS</div></div>
+      </div>
     </div>
   )
 }
