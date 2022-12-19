@@ -127,17 +127,19 @@ function Home() {
           axisPointer: {
             type: 'shadow'
           },
+          className: 'label',
+          padding : 0,
           // setting custom labels
           formatter: function (params: any) {
             let index: number = Number(params[0].name);
             let str: string = ylabels[index];
             let v1: number = overall[index];
             let v2: number = highPerformer[index];
-            return `<div className="label-cont">
-                <div style="color: black;font-weight: bold;">${str} 2019</div>
-                <div style="color: #33b1f5;">Overall: ${v1}</div>
-                <div style="color: rgb(244, 73, 73)">High Performer: ${v2}</div>
-                <div style="color: #40e7d9;">Difference: ${params[0].value} pp</div>
+            return `<div>
+                <div id="label-head" style="color: black;font-weight: bold;"><span>${str}</span><span style="font-size: 12px">&nbsp;&nbsp;2019</span></div>
+                <div class="label-cont"><span>Overall:</span><span style="color: #33b1f5;">+ ${v1} %</span></div>
+                <div class="label-cont"><span>High Performer:</span><span style="color: rgb(244, 73, 73)">+ ${v2} %</span></div>
+                <div class="label-cont"><span style="color: rgb(0, 0, 0)">Difference:</span><span style="color: #40e7d9;"> ${params[0].value} pp</span></div>
               </div>`;
           }
         },
